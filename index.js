@@ -6,6 +6,7 @@ import bodyParser from "body-parser";
 import "dotenv/config.js";
 //routes
 import oauth from "./src/components/oauth/main.js";
+import cities from "./src/components/cities/main.js";
 
 const app = express();
 app.use(cors());
@@ -20,6 +21,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/oauth", oauth);
+app.use("/cities", cities);
 
 server.listen(3000, () => {
   console.log("launch success port: 3000");
