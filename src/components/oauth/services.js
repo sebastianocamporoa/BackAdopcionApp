@@ -47,7 +47,7 @@ services.register = (data) => {
                     (err, result) => {
                       if (err) reject(err);
                       else {
-                        resolve(data);
+                        resolve({ id: result["insertId"], ...data });
                       }
                     }
                   );
