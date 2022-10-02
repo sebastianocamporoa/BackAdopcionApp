@@ -3,7 +3,7 @@ import cors from "cors";
 import morgan from "morgan";
 import http from "http";
 import bodyParser from "body-parser";
-
+import "dotenv/config.js";
 //routes
 import oauth from "./src/components/oauth/main.js";
 
