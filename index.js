@@ -8,6 +8,7 @@ import "dotenv/config.js";
 import oauth from "./src/components/oauth/main.js";
 import cities from "./src/components/cities/main.js";
 import localities from "./src/components/localities/main.js";
+import pets from "./src/components/pets/main.js";
 
 const app = express();
 app.use(cors());
@@ -24,6 +25,7 @@ app.get("/", (req, res) => {
 app.use("/oauth", oauth);
 app.use("/cities", cities);
 app.use("/localities", localities);
+app.use("/pets", pets);
 
 server.listen(3000, () => {
   console.log("launch success port: 3000");
