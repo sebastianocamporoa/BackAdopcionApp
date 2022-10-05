@@ -1,7 +1,7 @@
-import { City } from "../models/City.js";
+import { Locality } from "../models/Locality.js";
 
-export const getCities = async (req, res) => {
-  City.findAll()
+export const getLocalities = async (req, res) => {
+  Locality.findAll()
     .then((result) => {
       res.status(200).send(result);
     })

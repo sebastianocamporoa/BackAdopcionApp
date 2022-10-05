@@ -8,18 +8,15 @@ import "dotenv/config.js";
 //routes
 import oauth from "./src/components/oauth/main.js";
 // import cities from "./src/components/cities/main.js";
-import localities from "./src/components/localities/main.js";
+// import localities from "./src/components/localities/main.js";
 import pets from "./src/components/pets/main.js";
 
 // sequelize db
 import { sequelize } from "./src/database/database.js";
 
-// Database models
-import "./src/models/City.js";
-import "./src/models/Locality.js";
-
 // routes
 import cities from "./src/routes/cities.routes.js";
+import localities from "./src/routes/localities.routes.js";
 
 const app = express();
 app.use(cors());
@@ -41,8 +38,6 @@ app.use("/pets", pets);
 const PORT = 2000;
 const runServer = async () => {
   try {
-    await sequelize.authenticate();
-    console.log("Connection has been established successfully.");
     await sequelize.sync({ force: false });
     console.log("Sync has completed successfully.");
     await server.listen(PORT);
