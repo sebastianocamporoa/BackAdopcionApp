@@ -4,11 +4,22 @@ import morgan from "morgan";
 import http from "http";
 import bodyParser from "body-parser";
 import "dotenv/config.js";
+
 //routes
 import oauth from "./src/components/oauth/main.js";
-import cities from "./src/components/cities/main.js";
+// import cities from "./src/components/cities/main.js";
 import localities from "./src/components/localities/main.js";
 import pets from "./src/components/pets/main.js";
+
+// sequelize db
+import { sequelize } from "./src/database/database.js";
+
+// Database models
+import "./src/models/City.js";
+import "./src/models/Locality.js";
+
+// routes
+import cities from "./src/routes/cities.routes.js";
 
 const app = express();
 app.use(cors());
@@ -27,6 +38,18 @@ app.use("/cities", cities);
 app.use("/localities", localities);
 app.use("/pets", pets);
 
-server.listen(3000, () => {
-  console.log("launch success port: 3000");
-});
+const PORT = 2000;
+const runServer = async () => {
+  try {
+    await sequelize.authenticate();
+    console.log("Connection has been established successfully.");
+    await sequelize.sync({ force: false });
+    console.log("Sync has completed successfully.");
+    await server.listen(PORT);
+    console.log(`Server running successfully, PORT: ${PORT}`);
+  } catch (error) {
+    console.error("Unable to connect to the database:", error);
+  }
+};
+
+runServer();

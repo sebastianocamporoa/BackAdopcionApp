@@ -5,8 +5,8 @@ const controller = {};
 controller.getCities = (req, res) => {
   services
     .getCities()
-    .then(({ result, status = 200 }) => {
-      res.status(status).send(result);
+    .then((result) => {
+      res.status(200).send(result);
     })
     .catch((err) => {
       res.status(400).send(err);
