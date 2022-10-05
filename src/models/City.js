@@ -28,6 +28,6 @@ City.hasMany(Locality, {
 });
 
 Locality.belongsTo(City, {
-  foreignKey: "cityId",
+  foreignKey: "city_id",
   targetKey: "id",
 });
