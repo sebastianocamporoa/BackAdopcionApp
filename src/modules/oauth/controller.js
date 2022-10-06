@@ -31,12 +31,17 @@ export const registerUser = async (req, res) => {
 export const autenticateUser = async (req, res) => {
   const { email, password } = req.body;
   try {
-    const user = await OAuth.findOne({ where: { email, password } });
-    if (!user) {
+    const authUser = await OAuth.findOne({ where: { email, password } });
+    if (!authUser) {
       res.status(200).send({ message: "Usuario y/o contraseña incorrecto" });
       return;
     }
-    res.status(200).send({ message: "Usuario autenticado" });
+    const user = await User.findOne({
+      where: { oauth_id: authUser.dataValues.id },
+    });
+    res
+      .status(200)
+      .send({ message: "Usuario autenticado", data: user.dataValues });
   } catch (err) {
     res.status(400).send(err);
   }
