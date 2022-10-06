@@ -1,33 +1,32 @@
 import { User } from "./model.js";
 
-export const getAllUsers = (req, res) => {
-  User.findAll()
-    .then((result) => {
-      res.status(200).send(result);
-    })
-    .catch((err) => {
-      res.status(400).send(err);
-    });
+export const getAllUsers = async (req, res) => {
+  try {
+    const response = await User.findAll();
+    res.status(200).send(response);
+  } catch (err) {
+    res.status(400).send(err);
+  }
 };
 
-export const getUserById = (req, res) => {
+export const getUserById = async (req, res) => {
   const { id } = req.params;
-  User.findByPk(id)
-    .then((result) => {
-      res.status(200).send(result);
-    })
-    .catch((err) => {
-      res.status(400).send(err);
-    });
+  try {
+    const response = await User.findByPk(id);
+    res.status(200).send(response);
+  } catch (err) {
+    res.status(400).send(err);
+  }
 };
 
-export const getUserByDocument = (req, res) => {
+export const getUserByDocument = async (req, res) => {
   const { document_type_id, document_number } = req.params;
-  User.findOne({ where: { document_type_id, document_number } })
-    .then((result) => {
-      res.status(200).send(result);
-    })
-    .catch((err) => {
-      res.status(400).send(err);
+  try {
+    const response = await User.findOne({
+      where: { document_type_id, document_number },
     });
+    res.status(200).send(response);
+  } catch (err) {
+    res.status(400).send(err);
+  }
 };

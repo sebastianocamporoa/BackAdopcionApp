@@ -15,6 +15,8 @@ import localities from "./src/modules/localities/routes.js";
 import documentTypes from "./src/modules/documentTypes/routes.js";
 import users from "./src/modules/users/routes.js";
 import oauth from "./src/modules/oauth/routes.js";
+import petTypes from "./src/modules/petTypes/routes.js";
+import breeds from "./src/modules/breeds/routes.js";
 
 const app = express();
 app.use(cors());
@@ -34,6 +36,8 @@ app.use("/localities", localities);
 app.use("/document-types", documentTypes);
 app.use("/users", users);
 app.use("/oauth", oauth);
+app.use("/pet-types", petTypes);
+app.use("/breeds", breeds);
 
 const PORT = 2000;
 const runServer = async () => {
