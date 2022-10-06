@@ -3,6 +3,7 @@ import { sequelize } from "../../database/database.js";
 
 // fks
 import { City } from "../cities/model.js";
+import { User } from "../users/model.js";
 
 export const Country = sequelize.define(
   "countries",
@@ -28,6 +29,16 @@ Country.hasMany(City, {
 });
 
 City.belongsTo(Country, {
+  foreignKey: "country_id",
+  targetKey: "id",
+});
+
+Country.hasMany(User, {
+  foreignKey: "country_id",
+  sourceKey: "id",
+});
+
+User.belongsTo(Country, {
   foreignKey: "country_id",
   targetKey: "id",
 });

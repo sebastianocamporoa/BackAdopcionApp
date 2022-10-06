@@ -22,6 +22,11 @@ INSERT INTO mydb.localities (name, city_id) values
 ('Usme', 1),
 ('Kennedy', 1);
 
+INSERT INTO mydb.users (document_type_id, document_number, first_name, last_name, email, country_id, city_id, locality_id) values 
+(1, '1000250190', 'Salomón', 'Salmón', 'salomon@gmail.com', 1, 1, 1),
+(1, '1000250191', 'Johan', 'Mancilla', 'johan@gmail.com', 1, 1, 1),
+(1, '1000250192', 'Israel', 'De la rose', 'israel@gmail.com', 1, 1, 1);
+
 
 
 

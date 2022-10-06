@@ -5,12 +5,6 @@ import http from "http";
 import bodyParser from "body-parser";
 import "dotenv/config.js";
 
-//routes
-// import oauth from "./src/components/oauth/main.js";
-// import cities from "./src/components/cities/main.js";
-// import localities from "./src/components/localities/main.js";
-// import pets from "./src/components/pets/main.js";
-
 // sequelize db
 import { sequelize } from "./src/database/database.js";
 
@@ -18,8 +12,8 @@ import { sequelize } from "./src/database/database.js";
 import countries from "./src/modules/countries/routes.js";
 import cities from "./src/modules/cities/routes.js";
 import localities from "./src/modules/localities/routes.js";
-// import users from "./src/routes/users.routes.js";
-// import documentTypes from "./src/routes/documentTypes.routes.js";
+import documentTypes from "./src/modules/documentTypes/routes.js";
+import users from "./src/modules/users/routes.js";
 
 const app = express();
 app.use(cors());
@@ -37,8 +31,8 @@ app.get("/", (req, res) => {
 app.use("/countries", countries);
 app.use("/cities", cities);
 app.use("/localities", localities);
-// app.use("/users", users);
-// app.use("/document-types", documentTypes);
+app.use("/document-types", documentTypes);
+app.use("/users", users);
 // app.use("/pets", pets);
 
 const PORT = 2000;
