@@ -3,10 +3,12 @@ import { User } from "../../modules/users/model.js";
 
 export const registerUser = async (req, res) => {
   try {
-    const user = await getExistingUser(
-      req.body.document_type_id,
-      req.body.document_number
-    );
+    const user = await User.findOne({
+      where: {
+        document_type_id: req.body.document_type_id,
+        document_number: req.body.document_number,
+      },
+    });
     if (user) {
       res.status(200).send({ message: "El usuario ya existe mai nigga" });
       return;
@@ -28,7 +30,7 @@ export const registerUser = async (req, res) => {
   }
 };
 
-export const autenticateUser = async (req, res) => {
+export const authenticateUser = async (req, res) => {
   const { email, password } = req.body;
   try {
     const authUser = await OAuth.findOne({ where: { email, password } });
@@ -44,19 +46,5 @@ export const autenticateUser = async (req, res) => {
       .send({ message: "Usuario autenticado", data: user.dataValues });
   } catch (err) {
     res.status(400).send(err);
-  }
-};
-
-const getExistingUser = async (document_type_id, document_number) => {
-  try {
-    const response = await User.findOne({
-      where: {
-        document_type_id,
-        document_number,
-      },
-    });
-    return response;
-  } catch (err) {
-    return null;
   }
 };
