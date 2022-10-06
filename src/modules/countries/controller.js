@@ -1,6 +1,6 @@
 import { Country } from "./model.js";
 
-export const getAllCountries = async (req, res) => {
+export const getAllCountries = (req, res) => {
   Country.findAll()
     .then((result) => {
       res.status(200).send(result);

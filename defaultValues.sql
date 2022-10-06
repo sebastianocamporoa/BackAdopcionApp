@@ -27,7 +27,20 @@ INSERT INTO mydb.users (document_type_id, document_number, first_name, last_name
 (1, '1000250191', 'Johan', 'Mancilla', 'johan@gmail.com', 1, 1, 1),
 (1, '1000250192', 'Israel', 'De la rose', 'israel@gmail.com', 1, 1, 1);
 
-
+'''
+/oauth/signip POST
+{
+    "email": "johan@gmail.com",
+    "password": "1123123",
+    "first_name": "Johan",
+    "last_name": "Mancilla",
+    "document_type_id": 1,
+    "document_number": "23123112",
+    "country_id": 1,
+    "city_id": 1,
+    "locality_id": 1
+}
+'''
 
 
 

@@ -1,6 +1,6 @@
 import { City } from "./model.js";
 
-export const getAllCities = async (req, res) => {
+export const getAllCities = (req, res) => {
   City.findAll()
     .then((result) => {
       res.status(200).send(result);

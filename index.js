@@ -14,6 +14,7 @@ import cities from "./src/modules/cities/routes.js";
 import localities from "./src/modules/localities/routes.js";
 import documentTypes from "./src/modules/documentTypes/routes.js";
 import users from "./src/modules/users/routes.js";
+import oauth from "./src/modules/oauth/routes.js";
 
 const app = express();
 app.use(cors());
@@ -27,13 +28,12 @@ app.get("/", (req, res) => {
   res.send("The server is Ok");
 });
 
-// app.use("/oauth", oauth);
 app.use("/countries", countries);
 app.use("/cities", cities);
 app.use("/localities", localities);
 app.use("/document-types", documentTypes);
 app.use("/users", users);
-// app.use("/pets", pets);
+app.use("/oauth", oauth);
 
 const PORT = 2000;
 const runServer = async () => {
