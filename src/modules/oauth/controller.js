@@ -10,7 +10,9 @@ export const registerUser = async (req, res) => {
       },
     });
     if (user) {
-      res.status(200).send({ message: "El usuario ya existe mai nigga" });
+      res
+        .status(200)
+        .send({ message: "El usuario ya existe mai nigga", status: "dudoso" });
       return;
     }
     const { dataValues } = await OAuth.create({
@@ -23,7 +25,7 @@ export const registerUser = async (req, res) => {
     });
     res.status(200).send({
       message: "Usuario creado",
-      data: { oauth: dataValues, user: response.dataValues },
+      data: response.dataValues,
     });
   } catch (err) {
     res.status(400).send(err);
@@ -35,15 +37,20 @@ export const authenticateUser = async (req, res) => {
   try {
     const authUser = await OAuth.findOne({ where: { email, password } });
     if (!authUser) {
-      res.status(200).send({ message: "Usuario y/o contraseña incorrecto" });
+      res.status(200).send({
+        message: "Usuario y/o contraseña incorrecto",
+        status: "dudoso",
+      });
       return;
     }
     const user = await User.findOne({
       where: { oauth_id: authUser.dataValues.id },
     });
-    res
-      .status(200)
-      .send({ message: "Usuario autenticado", data: user.dataValues });
+    res.status(200).send({
+      message: "Usuario autenticado",
+      data: user.dataValues,
+      status: "percho",
+    });
   } catch (err) {
     res.status(400).send(err);
   }
