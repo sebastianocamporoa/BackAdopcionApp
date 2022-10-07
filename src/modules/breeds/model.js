@@ -1,11 +1,8 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../../database/database.js";
 
-// fks
-import { User } from "../users/model.js";
-
-export const Locality = sequelize.define(
-  "localities",
+export const Breed = sequelize.define(
+  "breeds",
   {
     id: {
       type: DataTypes.INTEGER,
@@ -21,13 +18,3 @@ export const Locality = sequelize.define(
     timestamps: false,
   }
 );
-
-Locality.hasMany(User, {
-  foreignKey: "locality_id",
-  sourceKey: "id",
-});
-
-User.belongsTo(Locality, {
-  foreignKey: "locality_id",
-  targetKey: "id",
-});

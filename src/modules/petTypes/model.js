@@ -1,8 +1,8 @@
 import { DataTypes } from "sequelize";
-import { sequelize } from "../database/database.js";
+import { sequelize } from "../../database/database.js";
 
-export const Locality = sequelize.define(
-  "localities",
+export const PetType = sequelize.define(
+  "pet_types",
   {
     id: {
       type: DataTypes.INTEGER,

@@ -2,7 +2,7 @@ import { DataTypes } from "sequelize";
 import { sequelize } from "../../database/database.js";
 
 // fks
-import { User } from "./User.js";
+import { User } from "../users/model.js";
 
 export const DocumentType = sequelize.define(
   "document_types",

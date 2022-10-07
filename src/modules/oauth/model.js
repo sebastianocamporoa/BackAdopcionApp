@@ -1,27 +1,22 @@
 import { DataTypes } from "sequelize";
-import { sequelize } from "../database/database.js";
+import { sequelize } from "../../database/database.js";
 
-export const User = sequelize.define(
-  "user",
+// fks
+import { User } from "../users/model.js";
+
+export const OAuth = sequelize.define(
+  "oauth",
   {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    document_number: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    first_name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    last_name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
     email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    password: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -33,5 +28,16 @@ export const User = sequelize.define(
   },
   {
     timestamps: false,
+    freezeTableName: true,
   }
 );
+
+OAuth.hasMany(User, {
+  foreignKey: "oauth_id",
+  sourceKey: "id",
+});
+
+User.belongsTo(OAuth, {
+  foreignKey: "oauth_id",
+  targetKey: "id",
+});

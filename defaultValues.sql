@@ -17,12 +17,21 @@ INSERT INTO mydb.cities (name, country_id) values
 ('Medellín', 1),
 ('Cali', 1);
 
-INSERT INTO mydb.localities (name, city_id) values 
-('Martires', 1),
-('Usme', 1),
-('Kennedy', 1);
 
-
+'''
+/oauth/signip POST
+{
+    "email": "johan@gmail.com",
+    "password": "1123123",
+    "first_name": "Johan",
+    "last_name": "Mancilla",
+    "document_type_id": 1,
+    "document_number": "23123112",
+    "country_id": 1,
+    "city_id": 1,
+    "locality_id": 1
+}
+'''
 INSERT INTO locality (id, name,cities_id)
 VALUES
 (1, 'Usaquen', 1),
