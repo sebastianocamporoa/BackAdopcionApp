@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getAllPets, getPetById, registerPet } from "./controller.js";
+import { getAllPets, getPetById, registerPet, updatePet } from "./controller.js";
 
 const router = new Router();
 
@@ -7,5 +7,6 @@ const router = new Router();
 router.get("/", getAllPets);
 router.get("/:id", getPetById);
 router.post("/newPet", registerPet);
+router.put("/updatePet", updatePet);
 
 export default router;

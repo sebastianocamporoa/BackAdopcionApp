@@ -44,7 +44,7 @@ export const registerPet = async (req, res) => {
 
     res.status(200).send({
         message: "Mascota registrada",
-        data: response.dataValues,
+        data: dataValues,
       });
   } catch (err) {
     res.status(400).send(err);
@@ -54,7 +54,14 @@ export const registerPet = async (req, res) => {
 
 export const updatePet = async (req, res) => {
     try {
-        
+        const id = req.params.id;
+        const response = await Pet.update(
+        {
+            ...req.body
+        },
+        {
+            where: { id: id },
+        })
     } catch (err) {
         res.status(400).send(err);
     }
