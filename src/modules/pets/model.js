@@ -1,26 +1,29 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../../database/database.js";
-import { Pet } from "../pets/model.js";
 
-export const User = sequelize.define(
-  "user",
+export const Pet = sequelize.define(
+  "pets",
   {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    document_number: {
+    name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    first_name: {
-      type: DataTypes.STRING,
+    age: {
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
-    last_name: {
-      type: DataTypes.STRING,
+    gender: {
+      type: DataTypes.ENUM('M', 'F'),
       allowNull: false,
+    },
+    weight: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
     },
     status: {
       type: DataTypes.TINYINT,
@@ -32,13 +35,3 @@ export const User = sequelize.define(
     timestamps: false,
   }
 );
-
-User.hasMany(Pet, {
-  foreignKey: "user_id",
-  sourceKey: "id",
-});
-
-Pet.belongsTo(User, {
-  foreignKey: "user_id",
-  targetKey: "id",
-});
