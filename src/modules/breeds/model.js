@@ -29,3 +29,4 @@ Pet.belongsTo(Breed, {
   foreignKey: "breed_id",
   targetKey: "id",
 });
+
