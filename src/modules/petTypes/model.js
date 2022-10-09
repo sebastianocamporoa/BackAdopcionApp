@@ -1,5 +1,7 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../../database/database.js";
+import { Breed } from "../breeds/model.js";
+import { Pet } from "../pets/model.js";
 
 export const PetType = sequelize.define(
   "pet_types",
@@ -18,3 +20,23 @@ export const PetType = sequelize.define(
     timestamps: false,
   }
 );
+
+PetType.hasMany(Pet, {
+  foreignKey: "pet_type_id",
+  sourceKey: "id",
+});
+
+Pet.belongsTo(PetType, {
+  foreignKey: "pet_type_id",
+  targetKey: "id",
+});
+
+
+PetType.hasMany(Breed, {
+  foreignKey: "pet_type_id",
+  targetKey: "id",
+});
+Breed.belongsTo(PetType, {
+  foreignKey: "pet_type_id",
+  sourceKey: "id",
+});
