@@ -22,10 +22,16 @@ INSERT INTO mydb.localities (name, city_id) values
 ('Usme', 1),
 ('Kennedy', 1);
 
-INSERT INTO mydb.users (document_type_id, document_number, first_name, last_name, email, country_id, city_id, locality_id) values 
-(1, '1000250190', 'Salomón', 'Salmón', 'salomon@gmail.com', 1, 1, 1),
-(1, '1000250191', 'Johan', 'Mancilla', 'johan@gmail.com', 1, 1, 1),
-(1, '1000250192', 'Israel', 'De la rose', 'israel@gmail.com', 1, 1, 1);
+INSERT INTO mydb.pet_types (name) values 
+('Perro'), ('Gato');
+
+INSERT INTO mydb.breeds (name, pet_type_id) values 
+('Chihuahua', 1),
+('Bulldog', 1),
+('Pitbull bum dale, mr worldwide', 1),
+('Abisinio', 2),
+('Asiático', 2),
+('Azul ruso', 2);
 
 '''
 /oauth/signip POST
@@ -41,6 +47,11 @@ INSERT INTO mydb.users (document_type_id, document_number, first_name, last_name
     "locality_id": 1
 }
 '''
+
+-- INSERT INTO mydb.users (document_type_id, document_number, first_name, last_name, email, country_id, city_id, locality_id) values 
+-- (1, '1000250190', 'Salomón', 'Salmón', 'salomon@gmail.com', 1, 1, 1),
+-- (1, '1000250191', 'Johan', 'Mancilla', 'johan@gmail.com', 1, 1, 1),
+-- (1, '1000250192', 'Israel', 'De la rose', 'israel@gmail.com', 1, 1, 1);
 
 
 

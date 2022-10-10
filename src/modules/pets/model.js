@@ -14,16 +14,16 @@ export const Pet = sequelize.define(
       allowNull: false,
     },
     age: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     gender: {
-      type: DataTypes.ENUM('M', 'F'),
+      type: DataTypes.ENUM("M", "F"),
       allowNull: false,
     },
     weight: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
     status: {
       type: DataTypes.TINYINT,
