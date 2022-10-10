@@ -1,5 +1,6 @@
 import { OAuth } from "./model.js";
 import { User } from "../../modules/users/model.js";
+import { serverResponse } from "../../utils/serverResponse.js";
 
 export const registerUser = async (req, res) => {
   try {
@@ -9,10 +10,17 @@ export const registerUser = async (req, res) => {
         document_number: req.body.document_number,
       },
     });
-    if (user) {
+    const oAuthUser = await OAuth.findOne({
+      where: {
+        email: req.body.email,
+      },
+    });
+    if (user || oAuthUser) {
       res
-        .status(200)
-        .send({ message: "El usuario ya existe mai nigga", status: "dudoso" });
+        .status(401)
+        .send(
+          serverResponse({ status: "dudoso", message: "El usuario ya existe" })
+        );
       return;
     }
     const { dataValues } = await OAuth.create({
@@ -23,10 +31,7 @@ export const registerUser = async (req, res) => {
       oauth_id: dataValues.id,
       ...req.body,
     });
-    res.status(200).send({
-      message: "Usuario creado",
-      data: response.dataValues,
-    });
+    res.status(200).send(serverResponse({ data: response.dataValues }));
   } catch (err) {
     res.status(400).send(err);
   }
@@ -37,20 +42,28 @@ export const authenticateUser = async (req, res) => {
   try {
     const authUser = await OAuth.findOne({ where: { email, password } });
     if (!authUser) {
-      res.status(200).send({
-        message: "Usuario y/o contraseña incorrecto",
-        status: "dudoso",
-      });
+      res.status(200).send(
+        serverResponse({
+          message: "Error en usuario y/o contraseña",
+          status: "dudoso",
+        })
+      );
       return;
     }
     const user = await User.findOne({
       where: { oauth_id: authUser.dataValues.id },
     });
-    res.status(200).send({
-      message: "Usuario autenticado",
-      data: user.dataValues,
-      status: "percho",
-    });
+    if (!user) {
+      serverResponse({
+        status: "dudoso",
+      });
+      return;
+    }
+    res.status(200).send(
+      serverResponse({
+        data: user.dataValues,
+      })
+    );
   } catch (err) {
     res.status(400).send(err);
   }
