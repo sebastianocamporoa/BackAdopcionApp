@@ -1,5 +1,6 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../../database/database.js";
+import { PetImage } from "../../modules/petImages/model.js";
 
 export const Pet = sequelize.define(
   "pets",
@@ -14,16 +15,16 @@ export const Pet = sequelize.define(
       allowNull: false,
     },
     age: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     gender: {
-      type: DataTypes.ENUM('M', 'F'),
+      type: DataTypes.ENUM("M", "F"),
       allowNull: false,
     },
     weight: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
     status: {
       type: DataTypes.TINYINT,
@@ -35,3 +36,13 @@ export const Pet = sequelize.define(
     timestamps: false,
   }
 );
+
+Pet.hasMany(PetImage, {
+  foreignKey: "pet_id",
+  sourceKey: "id",
+});
+
+PetImage.belongsTo(Pet, {
+  foreignKey: "pet_id",
+  targetKey: "id",
+});
