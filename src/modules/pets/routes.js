@@ -12,7 +12,7 @@ const router = new Router();
 // path: /pets
 router.get("/", getAllPets);
 router.get("/:id", getPetById);
-router.post("/newPet", upload.single("image"), registerPet);
-router.put("/updatePet", updatePet);
+router.post("/new-pet", upload.single("image"), registerPet);
+router.put("/update-pet", updatePet);
 
 export default router;
