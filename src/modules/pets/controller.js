@@ -9,7 +9,7 @@ export const getAllPets = async (req, res) => {
     const response = await Pet.findAll({ where: { status: 1 } });
     res.status(200).send(serverResponse({ data: response }));
   } catch (err) {
-    res.status(400).send(err);
+    res.status(500).send(err);
   }
 };
 
@@ -19,7 +19,7 @@ export const getPetById = async (req, res) => {
     const response = await Pet.findOne({ where: { id }, include: PetImage });
     res.status(200).send(serverResponse({ data: response }));
   } catch (err) {
-    res.status(400).send(err);
+    res.status(500).send(err);
   }
 };
 
@@ -69,8 +69,7 @@ export const registerPet = async (req, res) => {
       })
     );
   } catch (err) {
-    console.log(err);
-    res.status(400).send(serverResponse({ status: "dudoso", error: err }));
+    res.status(500).send(serverResponse({ status: "dudoso", error: err }));
   }
 };
 
@@ -104,7 +103,21 @@ export const updatePet = async (req, res) => {
 
     res.status(200).send(serverResponse({ message: "Mascota actualizada" }));
   } catch (err) {
-    console.log(err);
-    res.status(400).send(serverResponse({ status: "dudoso", error: err }));
+    res.status(500).send(serverResponse({ status: "dudoso", error: err }));
+  }
+};
+
+export const deletePet = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const response = await Pet.update({ status: 0 }, { where: { id } });
+    console.log(response);
+    if (response[0] === 0) {
+      res.status(200).send(serverResponse({ message: "La mascota no existe" }));
+      return;
+    }
+    res.status(200).send(serverResponse({ message: "Mascota eliminada" }));
+  } catch (err) {
+    res.status(500).send(serverResponse({ status: "dudoso", error: err }));
   }
 };
