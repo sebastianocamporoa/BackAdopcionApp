@@ -3,7 +3,7 @@ import { DocumentType } from "./model.js";
 
 export const getAllDocumentTypes = async (req, res) => {
   try {
-    const response = await DocumentType.findAll();
+    const response = await DocumentType.findAll({ where: { status: 1 } });
     res.status(200).send(serverResponse({ data: response }));
   } catch (err) {
     res.status(400).send(err);

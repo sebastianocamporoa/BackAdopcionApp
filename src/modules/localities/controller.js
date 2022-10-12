@@ -3,7 +3,7 @@ import { Locality } from "./model.js";
 
 export const getAllLocalities = async (req, res) => {
   try {
-    const response = await Locality.findAll();
+    const response = await Locality.findAll({ where: { status: 1 } });
     res.status(200).send(serverResponse({ data: response }));
   } catch (err) {
     res.status(400).send(err);

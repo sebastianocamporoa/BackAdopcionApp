@@ -6,7 +6,7 @@ import { PetImage } from "../../modules/petImages/model.js";
 
 export const getAllPets = async (req, res) => {
   try {
-    const response = await Pet.findAll();
+    const response = await Pet.findAll({ where: { status: 1 } });
     res.status(200).send(serverResponse({ data: response }));
   } catch (err) {
     res.status(400).send(err);

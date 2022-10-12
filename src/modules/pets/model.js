@@ -31,6 +31,11 @@ export const Pet = sequelize.define(
       allowNull: false,
       defaultValue: 1,
     },
+    adoption_status: {
+      type: DataTypes.TINYINT,
+      allowNull: false,
+      defaultValue: 1,
+    },
   },
   {
     timestamps: false,

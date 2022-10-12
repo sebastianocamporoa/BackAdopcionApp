@@ -19,6 +19,11 @@ export const DocumentType = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    status: {
+      type: DataTypes.TINYINT,
+      allowNull: false,
+      defaultValue: 1,
+    },
   },
   {
     timestamps: false,
