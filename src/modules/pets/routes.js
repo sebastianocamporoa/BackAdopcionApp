@@ -11,7 +11,7 @@ import {
 const router = new Router();
 
 // path: /pets
-router.get("/", getAllPets);
+router.post("/", getAllPets);
 router.get("/:id", getPetById);
 router.post("/new-pet", upload.any("images"), registerPet);
 router.put("/update-pet/:id", upload.any("images"), updatePet);
