@@ -17,4 +17,10 @@ export function uploadFile(file) {
   return s3.upload(uploadParams).promise();
 }
 
-// downloads
+export function deleteFile(key) {
+  const deleteParams = {
+    Key: key,
+    Bucket: process.env.AWS_BUCKET_NAME,
+  };
+  return s3.deleteObject(deleteParams).promise();
+}

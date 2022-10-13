@@ -15,6 +15,11 @@ export const PetType = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    status: {
+      type: DataTypes.TINYINT,
+      allowNull: false,
+      defaultValue: 1,
+    },
   },
   {
     timestamps: false,
@@ -30,7 +35,6 @@ Pet.belongsTo(PetType, {
   foreignKey: "pet_type_id",
   targetKey: "id",
 });
-
 
 PetType.hasMany(Breed, {
   foreignKey: "pet_type_id",

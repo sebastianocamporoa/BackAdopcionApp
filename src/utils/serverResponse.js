@@ -2,6 +2,7 @@ export const serverResponse = ({
   status = "percho",
   message = "relajao'",
   data = [],
+  error,
 }) => {
   const response = {
     status,
@@ -12,5 +13,10 @@ export const serverResponse = ({
   if (status === "dudoso" && message === "relajao'") {
     response["message"] = "Error desconocido";
   }
+
+  if (error) {
+    response["error"] = error;
+  }
+
   return response;
 };

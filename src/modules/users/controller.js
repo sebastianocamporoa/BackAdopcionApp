@@ -3,7 +3,7 @@ import { User } from "./model.js";
 
 export const getAllUsers = async (req, res) => {
   try {
-    const response = await User.findAll();
+    const response = await User.findAll({ where: { status: 1 } });
     res.status(200).send(serverResponse({ data: response }));
   } catch (err) {
     res.status(400).send(err);

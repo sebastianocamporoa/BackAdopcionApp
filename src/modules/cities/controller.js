@@ -3,7 +3,7 @@ import { City } from "./model.js";
 
 export const getAllCities = async (req, res) => {
   try {
-    const response = await City.findAll();
+    const response = await City.findAll({ where: { status: 1 } });
     res.status(200).send(serverResponse({ data: response }));
   } catch (err) {
     res.status(400).send(err);
