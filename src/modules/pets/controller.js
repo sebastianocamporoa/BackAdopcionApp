@@ -5,13 +5,25 @@ import { Pet } from "./model.js";
 import { PetImage } from "../../modules/petImages/model.js";
 
 export const getAllPets = async (req, res) => {
-  try {
-    const response = await Pet.findAll();
-    res.status(200).send(serverResponse({ data: response }));
-  } catch (err) {
-    res.status(400).send(err);
-  }
+    try {
+        const { type, gender, breed_id } = req.body;
+        let where = {};
+        if (type) where.pet_type_id = type;
+        if (gender) where.gender = gender;
+        if (breed_id) where.breed_id = breed_id;
+        console.log("where", where);
+        const response = await Pet.findAll({
+            where: where
+        });
+        res.status(200).send(response);
+      } catch (err) {
+        response.status(400).send(err);
+      }
 };
+
+export const getPets = async (req, res) => {
+
+}
 
 export const getPetById = async (req, res) => {
   const { id } = req.params;
