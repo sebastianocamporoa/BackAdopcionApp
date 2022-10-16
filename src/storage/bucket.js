@@ -10,7 +10,7 @@ const s3 = new S3({
 export function uploadFile(file) {
   const fileStream = fs.readFileSync(file.path);
   const uploadParams = {
-    Key: file.filename,
+    Key: file.filename + ".jpg",
     Bucket: process.env.AWS_BUCKET_NAME,
     Body: fileStream,
   };

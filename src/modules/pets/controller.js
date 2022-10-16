@@ -5,20 +5,23 @@ import { Pet } from "./model.js";
 import { PetImage } from "../../modules/petImages/model.js";
 
 export const getAllPets = async (req, res) => {
-    try {
-        const { type, gender, breed_id } = req.body;
-        let where = {};
-        if (type) where.pet_type_id = type;
-        if (gender) where.gender = gender;
-        if (breed_id) where.breed_id = breed_id;
-        console.log("where", where);
-        const response = await Pet.findAll({
-            where: where
-        });
-        res.status(200).send(response);
-      } catch (err) {
-        response.status(400).send(err);
-      }
+  try {
+    const { type, gender, breed_id } = req.body;
+    let where = {};
+    if (type) where.pet_type_id = type;
+    if (gender) where.gender = gender;
+    if (breed_id) where.breed_id = breed_id;
+    console.log("where", where);
+    const response = await Pet.findAll({
+      where: where,
+      order: [
+        ['id', 'DESC']
+      ]
+    });
+    res.status(200).send(response);
+  } catch (err) {
+    response.status(400).send(err);
+  }
 };
 
 export const getPets = async (req, res) => {
@@ -50,8 +53,8 @@ export const registerPet = async (req, res) => {
     //   return;
     // }
 
-    if (!req.body.data || req.files.length === 0) {
-      res.status(400).send(
+    if (!req.body || req.files.length === 0) {
+      res.status(200).send(
         serverResponse({
           status: "dudoso",
           message: "No es posible agregar una mascota",
@@ -60,11 +63,9 @@ export const registerPet = async (req, res) => {
       return;
     }
 
-    const { dataValues } = await Pet.create({
-      ...JSON.parse(req.body.data),
-    });
+    const { dataValues } = await Pet.create(req.body);
 
-    req.files.map(async (file) => {
+    req.files.forEach(async (file) => {
       const fileData = await uploadFile(file);
       await PetImage.create({
         key: fileData.Key,
